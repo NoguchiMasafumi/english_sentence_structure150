@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>English Sentence Structure 150</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <button id="speakAllButton">英語の構文150を再生</button>
@@ -166,9 +167,11 @@
 
     function speakText(text, lang, repeat = 1, callback = null) {
       let count = 0;
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent); // iOSデバイス判定
+
       function play() {
         window.speechSynthesis.cancel();
-        let voices = window.speechSynthesis.getVoices();
+        const voices = window.speechSynthesis.getVoices();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
 
@@ -178,53 +181,52 @@
 
         let selectedVoice = voices.find(voice => voice.lang === lang);
         utterance.voice = selectedVoice;
-        speechSynthesis.speak(utterance);
 
-        utterance.onend = function(event) {
-          count++;
-          if (count < repeat) {
-            play();
-          } else {
-            console.log(lang === 'en-US' ? '英語再生完了' : '日本語再生完了');
-            if (callback) {
-              callback();
-            }
-          }
-        };
-
-        if (lang === 'en-US') {
-          let timeoutId = setTimeout(() => {
+        // iPhoneの場合はonendイベントを使用
+        if (isIOS) {
+          utterance.onend = function () {
+            count++;
             if (count < repeat) {
-              count++;
-              if (count < repeat) {
-                play();
-              } else {
-                console.log('英語再生完了 (代替処理)');
-                if (callback) {
-                  callback();
-                }
-              }
+              play();
             } else {
-              //console.log('英語再生完了 (代替処理)');
+              console.log(lang === 'en-US' ? '英語再生完了 (iOS)' : '日本語再生完了 (iOS)');
+              if (callback) {
+                callback();
+              }
+            }
+          };
+        } else {
+          // PCやその他のブラウザではタイムアウト方式を利用
+          let timeoutId = setTimeout(() => {
+            count++;
+            if (count < repeat) {
+              play();
+            } else {
+              console.log(lang === 'en-US' ? '英語再生完了 (PC代替)' : '日本語再生完了 (PC代替)');
+              clearTimeout(timeoutId);
               if (callback) {
                 callback();
               }
             }
           }, text.length * 200);
 
-          utterance.onend = function(event) {
-            clearTimeout(timeoutId);
+          utterance.onend = function () {
+            clearTimeout(timeoutId); // 再生完了時にタイムアウトをクリア
             count++;
             if (count < repeat) {
+              play();
             } else {
-              //console.log('英語再生完了');
+              console.log(lang === 'en-US' ? '英語再生完了 (PC)' : '日本語再生完了 (PC)');
               if (callback) {
                 callback();
               }
             }
           };
         }
+
+        speechSynthesis.speak(utterance);
       }
+
       play();
       currentSentenceElement.textContent = text; // 文面を表示
     }
