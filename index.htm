@@ -235,8 +235,10 @@
         if (index < sentences.length) {
           speakText(sentences[index].english, 'en-US', 3, () => {
             speakText(sentences[index].japanese, 'ja-JP', 1, () => {
-              index++;
-              playNext();
+                speakText(sentences[index].english, 'en-US', 1, () => {
+                    index++;
+                    playNext();
+                })
             });
           });
         } else {
