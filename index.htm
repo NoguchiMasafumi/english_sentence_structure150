@@ -15,14 +15,14 @@
   </style>
 </head>
 <body>
-  <button id="speakAllButton">英語の構文150を再生</button>
+  <button id="speakAllButton">英語の構文150を再生</button>　<span id="progressDisplay"></span>
   <div id="currentSentence"></div>
 
   <script>
     const sentences = [
 { num:1,english:"It is quite natural that tastes differ.",japanese:"人の好みが違うのは全く当然だ。"},
 { num:2,english:"It seems that oil prices will come down soon.",japanese:"石油価格はどうやらすぐに下がりそうだ。"},
-{ num:3,english:"It is said that elephants have good memories.",japanese:"ゾウの記憶力は優れていると言われている。"},
+{ num:3,english:"It is said that elephants have good memories.",japanese:"ゾウの記憶りょくは優れていると言われている。"},
 { num:4,english:"It never occurred to me that I could be an artist.",japanese:"自分が芸術家になれるとは思いも寄らなかった。"},
 { num:5,english:"It doesn't matter if you are late.",japanese:"遅くなっても構わないよ。"},
 { num:6,english:"It goes without saying that exercise is good for your health.",japanese:"運動が健康にいいことは言うまでもない。"},
@@ -103,7 +103,7 @@
 { num:81,english:"The memory card is no bigger than a stamp.",japanese:"そのメモリーカードは切手ほどの大きさしかない。"},
 { num:82,english:"If I were a bird, I would fly to you.",japanese:"もし鳥だったら、あなたのもとへ飛んでいくのだが。"},
 { num:83,english:"If she had been a boy, she would have been named Ken.",japanese:"もし彼女が男の子だったら、ケンという名前になっていたであろう。"},
-{ num:84,english:"If it should rain, the concert will move indoors.",japanese:"もし万一雨が降れば、コンサートは室内に移動することになるだろう。"},
+{ num:84,english:"If it should rain, the concert will move indoors.",japanese:"もし万一雨がふれば、コンサートは室内に移動することになるだろう。"},
 { num:85,english:"If I were to live again, I would like to be a scientist.",japanese:"もう一度人生をやり直すとすれば、科学者になりたいものだ。"},
 { num:86,english:"If it were not for the snow, the plane could take off.",japanese:"もしも雪でなければ、飛行機は離陸できるのだが。"},
 { num:87,english:"Without language, there would be no thought.",japanese:"言語がなければ、思想は存在しないであろう。"},
@@ -127,11 +127,11 @@
 { num:105,english:"Every member worked hard so that his team would win.",japanese:"チームが勝てるようにメンバー全員ががんばった。"},
 { num:106,english:"Bill was so excited that he couldn't be still.",japanese:"ビルは興奮のあまりじっとしていられなかった。"},
 { num:107,english:"It was such an exciting game that I forgot to take pictures.",japanese:"それはとても興奮する試合だったので、写真を撮るのを忘れてしまった。"},
-{ num:108,english:"Take an umbrella in case it rains.",japanese:"雨が降る場合に備えて傘を持っていきなさい。"},
+{ num:108,english:"Take an umbrella in case it rains.",japanese:"雨がふる場合に備えて傘を持っていきなさい。"},
 { num:109,english:"He wrote it down lest he forget it.",japanese:"忘れないように彼はそれを書き留めた。"},
 { num:110,english:"On arriving at the station, I called a friend of mine.",japanese:"駅に到着するとすぐ、友達に電話した。"},
 { num:111,english:"As soon as he got home, he turned on the TV.",japanese:"彼は帰宅するとすぐにテレビをつけた。"},
-{ num:112,english:"He had hardly reached the station when it began to snow.",japanese:"彼が駅に着いたとたんに雪が降り出した。"},
+{ num:112,english:"He had hardly reached the station when it began to snow.",japanese:"彼が駅に着いたとたんに雪がふり出した。"},
 { num:113,english:"No sooner had I sat down on the sofa than the phone rang.",japanese:"私がソファーに腰を下ろしたとたんに電話が鳴った。"},
 { num:114,english:"We had not waited long before our bus came.",japanese:"そんなに待たないうちにバスが来た。"},
 { num:115,english:"It was last week that Mike bought a bike at the store.",japanese:"マイクがお店で自転車を買ったのは先週だった。"},
@@ -144,13 +144,13 @@
 { num:122,english:"\"I like coffee.\" --- \"So do I.\"",japanese:"「コーヒーが好きです」「私も（好きです）」"},
 { num:123,english:"\"I don't like coffee.\" --- \"Neither do I.\"",japanese:"「コーヒーは好きじゃない」「私も（好きじゃないよ）」"},
 { num:124,english:"It is true that he is very old, but he is healthy.",japanese:"彼は確かにとても高齢だが、健康です。"},
-{ num:125,english:"Even if it rains tomorrow, I will go to the movies.",japanese:"たとえ明日雨が降っても私は映画を見に行きます。"},
-{ num:126,english:"Whether you like it or not, he is our leader.",japanese:"気に入ろうが入るまいが、彼は私たちの指導者なのですよ。"},
+{ num:125,english:"Even if it rains tomorrow, I will go to the movies.",japanese:"たとえ明日雨がふっても私は映画を見に行きます。"},
+{ num:126,english:"Whether you like it or not, he is our leader.",japanese:"気にいろうがいるまいが、彼は私たちの指導者なのですよ。"},
 { num:127,english:"To solve the problem is difficult, if not impossible.",japanese:"その問題を解くのは不可能ではないとしても難しい"},
 { num:128,english:"I'm going to school today no matter what happens.",japanese:"何が起ころうとも今日は学校に行くぞ。"},
 { num:129,english:"Whoever you are, wherever you come from, you are welcome.",japanese:"君がだれであれ、どこの出身であれ、君を歓迎する。"},
 { num:130,english:"Angry as he was, he tried to smile.",japanese:"彼は怒っていたが、笑おうとした。"},
-{ num:131,english:"Tom has remained poor, while his brother has made a fortune.",japanese:"トムは貧乏なままだったが、トムの兄は一財産つくった。"},
+{ num:131,english:"Tom has remained poor, while his brother has made a fortune.",japanese:"トムは貧乏なままだったが、トムの兄はひと財産つくった。"},
 { num:132,english:"I have two hobbies. One is cycling and the other is fishing.",japanese:"私には二つ趣味があって、一つはサイクリング、もう一つは釣りです。"},
 { num:133,english:"Some people said yes and others said no.",japanese:"賛成した人もいれば反対した人もいた。"},
 { num:134,english:"Suppose that you can't come, who will do the work?",japanese:"君が来られない場合、だれがその仕事をしますか。"},
@@ -186,11 +186,10 @@
         utterance.lang = lang;
 
         const urlParams = new URLSearchParams(window.location.search);
-        const englishSpeed = urlParams.get("english-speed");
+        const englishSpeed = urlParams.get("english_speed");
         if (lang === 'en-US') {
           utterance.rate = englishSpeed ? parseFloat(englishSpeed) : 0.5;
         }
-
         
         let selectedVoice = voices.find(voice => voice.lang === lang);
         utterance.voice = selectedVoice;
@@ -202,7 +201,7 @@
             if (count < repeat) {
               play();
             } else {
-              console.log(lang === 'en-US' ? '英語再生完了 (iOS)' : '日本語再生完了 (iOS)');
+              //console.log(lang === 'en-US' ? '英語再生完了 (iOS)' : '日本語再生完了 (iOS)');
               if (callback) {
                 callback();
               }
@@ -210,31 +209,44 @@
           };
         } else {
           // PCやその他のブラウザではタイムアウト方式を利用
-          let timeoutId = setTimeout(() => {
-            count++;
-            if (count < repeat) {
-              play();
-            } else {
-              //console.log(lang === 'en-US' ? '英語再生完了 (PC代替)' : '日本語再生完了 (PC代替)');
-              clearTimeout(timeoutId);
-              if (callback) {
-                callback();
+          if (lang === 'en-US') {
+            // 英語はタイムアウト方式
+            let timeoutId = setTimeout(() => {
+              count++;
+              if (count < repeat) {
+                play();
+              } else {
+                clearTimeout(timeoutId);
+                if (callback) {
+                  callback();
+                }
               }
-            }
-          }, text.length * 200);
+            }, text.length * 100 / utterance.rate);
 
-          utterance.onend = function () {
-            clearTimeout(timeoutId); // 再生完了時にタイムアウトをクリア
-            count++;
-            if (count < repeat) {
-              play();
-            } else {
-              //console.log(lang === 'en-US' ? '英語再生完了 (PC)' : '日本語再生完了 (PC)');
-              if (callback) {
-                callback();
+            utterance.onend = function () {
+              clearTimeout(timeoutId); // 再生完了時にタイムアウトをクリア
+              count++;
+              if (count < repeat) {
+                play();
+              } else {
+                if (callback) {
+                  callback();
+                }
               }
-            }
-          };
+            };
+          } else if (lang === 'ja-JP') {
+            // 日本語はonendイベントで判定
+            utterance.onend = function () {
+              count++;
+              if (count < repeat) {
+                play();
+              } else {
+                if (callback) {
+                  callback();
+                }
+              }
+            };
+          }
         }
 
         speechSynthesis.speak(utterance);
@@ -245,21 +257,45 @@
     }
 
     document.getElementById("speakAllButton").addEventListener("click", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const startNum = urlParams.get("start_num") ? parseInt(urlParams.get("start_num"), 10) : null; // nullをデフォルトに設定
+
+      let playOrder;
+      if (startNum !== null) {
+        // start_numが指定されている場合、その番号から順番に再生
+        const startIndex = sentences.findIndex(sentence => sentence.num === startNum);
+        playOrder = sentences.slice(startIndex); // startNum以降の要素のみを再生
+      } else {
+        // start_numが指定されていない場合、ランダム順序で再生
+        playOrder = [...sentences].sort(() => Math.random() - 0.5);
+      }
+
       let index = 0;
+
       function playNext() {
-        if (index < sentences.length) {
-          speakText(sentences[index].english, 'en-US', 3, () => {
-            speakText(sentences[index].japanese, 'ja-JP', 1, () => {
-                speakText(sentences[index].english, 'en-US', 1, () => {
-                    index++;
-                    playNext();
-                })
+        if (index < playOrder.length) {
+          // 再生中の進捗を表示
+          if (startNum !== null) {
+            // start_numが指定されている場合はJSONのnumを表示
+            progressDisplay.textContent = `${playOrder[index].num} / ${sentences.length}`;
+          } else {
+            // ランダム再生の場合は1からカウントアップ
+            progressDisplay.textContent = `${index + 1} / ${playOrder.length}`;
+          }
+
+          speakText(playOrder[index].english, 'en-US', 3, () => {
+            speakText(playOrder[index].japanese, 'ja-JP', 1, () => {
+              speakText(playOrder[index].english, 'en-US', 1, () => {
+                index++;
+                playNext();
+              });
             });
           });
         } else {
           currentSentenceElement.textContent = ""; // 全て再生終了後にクリア
         }
       }
+
       playNext();
     });
   </script>
